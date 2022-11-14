@@ -1,16 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Contexts/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
   const menuItems = (
     <>
       <li>
-        <Link to="/">Home</Link>
-        <Link>About</Link>
-        <Link to="/appointment">Appointment</Link>
-        <Link>Reviews</Link>
-        <Link>Contact Us</Link>
-        <Link>Login</Link>
+        <Link className="rounded-lg m-1" to="/">
+          Home
+        </Link>
+        <Link className="rounded-lg m-1">About</Link>
+        <Link className="rounded-lg m-1" to="/appointment">
+          Appointment
+        </Link>
+        <Link className="rounded-lg m-1">Reviews</Link>
+        <Link className="rounded-lg m-1">Contact Us</Link>
+        {user?.uid ? (
+          <Link onClick={logOut} className="rounded-lg m-1">
+            Sign Out
+          </Link>
+        ) : (
+          <Link className="rounded-lg m-1" to="/login">
+            Login
+          </Link>
+        )}
       </li>
     </>
   );
@@ -19,7 +33,7 @@ const Navbar = () => {
       <div className="navbar justify-around bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={0} className="btn btn-ghost ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -47,7 +61,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0">{menuItems}</ul>
+          <ul className="menu menu-horizontal p-0 ">{menuItems}</ul>
         </div>
       </div>
     </div>

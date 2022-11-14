@@ -1,18 +1,18 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
-const Login = () => {
-  const { googleSignin, login } = useContext(AuthContext);
+const SignUp = () => {
+  const { googleSignin, createUser } = useContext(AuthContext);
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  const handlelogin = (data) => {
-    console.log(data.email);
-    login(data.email, data.password)
+  const handlesignup = (data) => {
+    console.log(data);
+    createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
@@ -31,7 +31,19 @@ const Login = () => {
     <div className="h-[700px] flex justify-center items-center">
       <div className="w-96 p-5 drop-shadow-xl bg-white rounded-xl">
         <h2 className="text-xl text-center">Login</h2>
-        <form onSubmit={handleSubmit(handlelogin)}>
+        <form onSubmit={handleSubmit(handlesignup)}>
+          <div className="form-control w-full ">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              {...register("name")}
+              placeholder="You Name"
+            />
+          </div>
           <div className="form-control w-full ">
             <label className="label">
               <span className="label-text">Email</span>
@@ -75,9 +87,9 @@ const Login = () => {
           />
         </form>
         <p className="text-sm text-center my-3">
-          New to Doctors Portal?{" "}
-          <Link to="/signup" className="text-primary link">
-            Create new Account
+          Already Have an Account!{" "}
+          <Link to="/login" className="text-primary link">
+            Please Login
           </Link>{" "}
         </p>
         <div className="divider">OR</div>
@@ -89,4 +101,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
