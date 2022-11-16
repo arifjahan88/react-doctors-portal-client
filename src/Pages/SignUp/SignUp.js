@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
-  const { googleSignin, createUser } = useContext(AuthContext);
+  const { googleSignin, createUser, updateuser } = useContext(AuthContext);
+  const [firebaseerror, setfirebaseerror] = useState("");
   const {
     register,
     formState: { errors },
@@ -12,12 +14,23 @@ const SignUp = () => {
   } = useForm();
   const handlesignup = (data) => {
     console.log(data);
+    setfirebaseerror("");
     createUser(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        toast.success("User Create Successfully");
+        const userInfo = {
+          displayName: data.name,
+        };
+        updateuser(userInfo)
+          .then(() => {})
+          .catch((err) => console.error(err));
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setfirebaseerror(err.message);
+      });
   };
   const handlegooglelogin = () => {
     googleSignin()
@@ -25,7 +38,9 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+      });
   };
   return (
     <div className="h-[700px] flex justify-center items-center">
@@ -76,6 +91,12 @@ const SignUp = () => {
                 {errors.password?.message}
               </p>
             )}
+            {firebaseerror && (
+              <p className="text-red-600 font-semibold text-xs">
+                {firebaseerror}
+              </p>
+            )}
+
             <label className="label">
               <span className="label-text text-xs link">Forget Password?</span>
             </label>
@@ -86,6 +107,7 @@ const SignUp = () => {
             type="submit"
           />
         </form>
+
         <p className="text-sm text-center my-3">
           Already Have an Account!{" "}
           <Link to="/login" className="text-primary link">

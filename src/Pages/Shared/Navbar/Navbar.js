@@ -17,9 +17,14 @@ const Navbar = () => {
         <Link className="rounded-lg m-1">Reviews</Link>
         <Link className="rounded-lg m-1">Contact Us</Link>
         {user?.uid ? (
-          <Link onClick={logOut} className="rounded-lg m-1">
-            Sign Out
-          </Link>
+          <>
+            <Link to="/dashboard" className="rounded-lg m-1">
+              Dashboard
+            </Link>
+            <Link onClick={logOut} className="rounded-lg m-1">
+              Sign Out
+            </Link>
+          </>
         ) : (
           <Link className="rounded-lg m-1" to="/login">
             Login
