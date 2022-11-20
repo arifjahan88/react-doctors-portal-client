@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const SignUp = () => {
   const { googleSignin, createUser, updateuser } = useContext(AuthContext);
   const [firebaseerror, setfirebaseerror] = useState("");
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -24,7 +25,9 @@ const SignUp = () => {
           displayName: data.name,
         };
         updateuser(userInfo)
-          .then(() => {})
+          .then(() => {
+            navigate("/");
+          })
           .catch((err) => console.error(err));
       })
       .catch((err) => {
@@ -37,6 +40,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((err) => {
         console.error(err);
@@ -52,12 +56,7 @@ const SignUp = () => {
               <span className="label-text">Name</span>
             </label>
 
-            <input
-              type="text"
-              className="input input-bordered w-full"
-              {...register("name")}
-              placeholder="You Name"
-            />
+            <input type="text" className="input input-bordered w-full" {...register("name")} placeholder="You Name" />
           </div>
           <div className="form-control w-full ">
             <label className="label">
@@ -70,11 +69,7 @@ const SignUp = () => {
               {...register("email", { required: "Email Address is required" })}
               placeholder="Email"
             />
-            {errors.email && (
-              <p className="text-red-600 text-xs mt-1">
-                {errors.email?.message}
-              </p>
-            )}
+            {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email?.message}</p>}
           </div>
           <div className="form-control w-full">
             <label className="label">
@@ -86,26 +81,14 @@ const SignUp = () => {
               {...register("password", { required: "Password is required" })}
               placeholder="Password"
             />
-            {errors.password && (
-              <p className="text-red-600 text-xs mt-1">
-                {errors.password?.message}
-              </p>
-            )}
-            {firebaseerror && (
-              <p className="text-red-600 font-semibold text-xs">
-                {firebaseerror}
-              </p>
-            )}
+            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password?.message}</p>}
+            {firebaseerror && <p className="text-red-600 font-semibold text-xs">{firebaseerror}</p>}
 
             <label className="label">
               <span className="label-text text-xs link">Forget Password?</span>
             </label>
           </div>
-          <input
-            className="btn btn-accent w-full text-white"
-            value="submit"
-            type="submit"
-          />
+          <input className="btn btn-accent w-full text-white" value="submit" type="submit" />
         </form>
 
         <p className="text-sm text-center my-3">

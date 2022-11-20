@@ -29,6 +29,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate("/");
       })
       .catch((err) => console.error(err));
   };
@@ -48,11 +49,7 @@ const Login = () => {
               {...register("email", { required: "Email Address is required" })}
               placeholder="Email"
             />
-            {errors.email && (
-              <p className="text-red-600 text-xs mt-1">
-                {errors.email?.message}
-              </p>
-            )}
+            {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email?.message}</p>}
           </div>
           <div className="form-control w-full">
             <label className="label">
@@ -64,20 +61,12 @@ const Login = () => {
               {...register("password", { required: "Password is required" })}
               placeholder="Password"
             />
-            {errors.password && (
-              <p className="text-red-600 text-xs mt-1">
-                {errors.password?.message}
-              </p>
-            )}
+            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password?.message}</p>}
             <label className="label">
               <span className="label-text text-xs link">Forget Password?</span>
             </label>
           </div>
-          <input
-            className="btn btn-accent w-full text-white"
-            value="submit"
-            type="submit"
-          />
+          <input className="btn btn-accent w-full text-white" value="submit" type="submit" />
         </form>
         <p className="text-sm text-center my-3">
           New to Doctors Portal?{" "}
