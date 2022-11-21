@@ -36,6 +36,7 @@ const AuthProvider = ({ children }) => {
   };
   const logOut = () => {
     setloading(true);
+    localStorage.removeItem("AccessToken");
     return signOut(auth);
   };
   useEffect(() => {
@@ -57,9 +58,7 @@ const AuthProvider = ({ children }) => {
     googleSignin,
     logOut,
   };
-  return (
-    <AuthContext.Provider value={AuthInfo}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={AuthInfo}>{children}</AuthContext.Provider>;
 };
 
 export default AuthProvider;

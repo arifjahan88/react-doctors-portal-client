@@ -1,29 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import useToken from "../../Hooks/UseToken";
 
 const Login = () => {
-  const { googleSignin, login } = useContext(AuthContext);
-  const location = useLocation();
-  const navigate = useNavigate();
-
-  const from = location.state?.from?.pathname || "/";
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+  const { googleSignin, login } = useContext(AuthContext);
+  const [loginuserEmail, setloginuserEmail] = useState("");
+  const [token] = useToken(loginuserEmail);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replece: true });
+  }
+
   const handlelogin = (data) => {
     console.log(data.email);
     login(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate(from, { replece: true });
+        setloginuserEmail(data.email);
       })
       .catch((err) => console.error(err));
   };
+
   const handlegooglelogin = () => {
     googleSignin()
       .then((result) => {
@@ -33,6 +42,7 @@ const Login = () => {
       })
       .catch((err) => console.error(err));
   };
+
   return (
     <div className="h-[700px] flex justify-center items-center">
       <div className="w-96 p-5 drop-shadow-xl bg-white rounded-xl">

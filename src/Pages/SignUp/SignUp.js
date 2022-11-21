@@ -3,11 +3,18 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
+import useToken from "../../Hooks/UseToken";
 
 const SignUp = () => {
   const { googleSignin, createUser, updateuser } = useContext(AuthContext);
   const [firebaseerror, setfirebaseerror] = useState("");
+  const [createduserEmail, setcreatedUserEmail] = useState("");
+  const [token] = useToken(createduserEmail);
   const navigate = useNavigate();
+
+  if (token) {
+    navigate("/");
+  }
   const {
     register,
     formState: { errors },
@@ -18,15 +25,13 @@ const SignUp = () => {
     setfirebaseerror("");
     createUser(data.email, data.password)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
         toast.success("User Create Successfully");
         const userInfo = {
           displayName: data.name,
         };
         updateuser(userInfo)
           .then(() => {
-            navigate("/");
+            saveUser(data.name, data.email);
           })
           .catch((err) => console.error(err));
       })
@@ -46,6 +51,23 @@ const SignUp = () => {
         console.error(err);
       });
   };
+
+  const saveUser = (name, email) => {
+    const user = { name, email };
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setcreatedUserEmail(email);
+      });
+  };
+
   return (
     <div className="h-[700px] flex justify-center items-center">
       <div className="w-96 p-5 drop-shadow-xl bg-white rounded-xl">
