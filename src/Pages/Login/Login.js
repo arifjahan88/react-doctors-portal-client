@@ -37,8 +37,8 @@ const Login = () => {
     googleSignin()
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        navigate("/");
+        console.log(user.email);
+        setloginuserEmail(user.email);
       })
       .catch((err) => console.error(err));
   };
@@ -71,7 +71,9 @@ const Login = () => {
               {...register("password", { required: "Password is required" })}
               placeholder="Password"
             />
-            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password?.message}</p>}
+            {errors.password && (
+              <p className="text-red-600 text-xs mt-1">{errors.password?.message}</p>
+            )}
             <label className="label">
               <span className="label-text text-xs link">Forget Password?</span>
             </label>

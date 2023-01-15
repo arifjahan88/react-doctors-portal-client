@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../layout/DashboardLayout";
 import Main from "../../layout/Main";
 import Allusers from "../../Pages/AllUsers/Allusers";
+import AppointmentCategory from "../../Pages/Appointment/AppoinmentCategory/AppointmentCategory";
 import Appointment from "../../Pages/Appointment/Appointment/Appointment";
 import AddDoctor from "../../Pages/DashBoard/AddDoctor/AddDoctor";
 import ManageDoctors from "../../Pages/DashBoard/ManageDoctors/ManageDoctors";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "availableappointment",
+        element: <AppointmentCategory></AppointmentCategory>,
       },
     ],
   },
@@ -78,11 +83,12 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         element: (
-          <AdminRoute>
+          <PrivaeRoutes>
             <Payment></Payment>
-          </AdminRoute>
+          </PrivaeRoutes>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/bookings/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`https://react-doctors-portal-server.vercel.app/bookings/${params.id}`),
       },
     ],
   },

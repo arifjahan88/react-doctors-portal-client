@@ -11,7 +11,7 @@ const Navbar = () => {
           Home
         </Link>
         <Link className="rounded-lg m-1">About</Link>
-        <Link className="rounded-lg m-1" to="/appointment">
+        <Link className="rounded-lg m-1" to="/availableappointment">
           Appointment
         </Link>
         <Link className="rounded-lg m-1">Reviews</Link>
@@ -46,7 +46,12 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
               </svg>
             </label>
             <ul
@@ -63,7 +68,11 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0 ">{menuItems}</ul>
         </div>
-        <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
+        <label
+          htmlFor="dashboard-drawer"
+          tabIndex={2}
+          className="btn btn-ghost lg:hidden"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
@@ -71,7 +80,12 @@ const Navbar = () => {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h8m-8 6h16"
+            />
           </svg>
         </label>
       </div>

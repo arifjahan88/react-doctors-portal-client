@@ -1,5 +1,6 @@
 import React from "react";
-import chair from "../../../assets/images/chair.png";
+import { Link } from "react-router-dom";
+import image from "../../../assets/images/banner.jpg";
 import PrimaryButton from "../../../Components/PrimaryButton/PrimaryButton";
 
 const Banner = () => {
@@ -7,15 +8,20 @@ const Banner = () => {
     <div>
       <div className="hero">
         <div className="hero-content flex-col lg:flex-row-reverse p-10">
-          <img src={chair} className="w-1/2 rounded-lg shadow-2xl" alt="" />
+          <img
+            src={image}
+            className="w-1/2 rounded-2xl shadow-2xl opacity-80"
+            alt=""
+          />
           <div>
-            <h1 className="text-5xl font-bold">Box Office News!</h1>
+            <h1 className="text-5xl font-bold">Appointment Now!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              This is a website where a patient can book a doctor's appointment
+              for his disease at home. So don't be late. Hurry Up!
             </p>
-            <PrimaryButton>Get Started</PrimaryButton>
+            <Link to="/appointment">
+              <PrimaryButton>Get Started</PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

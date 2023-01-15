@@ -5,7 +5,7 @@ import { useLoaderData, useNavigation } from "react-router-dom";
 import Loading from "../../Shared/Loading/Loading";
 import CheckOutForm from "./CheckOutForm";
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
+const stripePromise = loadStripe("pk_test_51M70eKJMWjbKu3ZgmyHXa2OKbuT03G31WsEQQSJcsGjnU72JpfKTfEhgeq7Ll75mYt16huKj8xxPbKIxsyOTVy7900lBZ90fvk");
 
 const Payment = () => {
   const navigation = useNavigation();

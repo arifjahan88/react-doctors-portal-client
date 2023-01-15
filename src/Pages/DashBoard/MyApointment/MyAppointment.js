@@ -9,11 +9,15 @@ const MyAppointment = () => {
   const { data: bookings = [] } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/bookings?email=${user?.email}`, {
-        headers: {
-          authorization: `bearer ${localStorage.getItem("AccessToken")}`,
-        },
-      });
+      const res = await fetch(
+        `https://react-doctors-portal-server.vercel.app/bookings?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${localStorage.getItem("AccessToken")}`,
+          },
+        }
+      );
+
       const data = await res.json();
       return data;
     },
@@ -50,7 +54,9 @@ const MyAppointment = () => {
                       <button className="btn btn-warning btn-outline btn-xs">Pay</button>
                     </Link>
                   )}
-                  {booking.price && booking.paid && <span className="text-green-600 font-bold">Paid</span>}
+                  {booking.price && booking.paid && (
+                    <span className="text-green-600 font-bold">Paid</span>
+                  )}
                 </td>
               </tr>
             ))}

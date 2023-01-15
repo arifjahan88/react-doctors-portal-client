@@ -45,7 +45,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate("/");
+        setcreatedUserEmail(user.email);
       })
       .catch((err) => {
         console.error(err);
@@ -54,7 +54,7 @@ const SignUp = () => {
 
   const saveUser = (name, email) => {
     const user = { name, email };
-    fetch("http://localhost:5000/users", {
+    fetch("https://react-doctors-portal-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -78,7 +78,12 @@ const SignUp = () => {
               <span className="label-text">Name</span>
             </label>
 
-            <input type="text" className="input input-bordered w-full" {...register("name")} placeholder="You Name" />
+            <input
+              type="text"
+              className="input input-bordered w-full"
+              {...register("name")}
+              placeholder="You Name"
+            />
           </div>
           <div className="form-control w-full ">
             <label className="label">
@@ -103,7 +108,9 @@ const SignUp = () => {
               {...register("password", { required: "Password is required" })}
               placeholder="Password"
             />
-            {errors.password && <p className="text-red-600 text-xs mt-1">{errors.password?.message}</p>}
+            {errors.password && (
+              <p className="text-red-600 text-xs mt-1">{errors.password?.message}</p>
+            )}
             {firebaseerror && <p className="text-red-600 font-semibold text-xs">{firebaseerror}</p>}
 
             <label className="label">

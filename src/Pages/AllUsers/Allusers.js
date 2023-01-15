@@ -5,11 +5,12 @@ import toast from "react-hot-toast";
 const Allusers = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
-    queryFn: () => fetch("http://localhost:5000/users").then((res) => res.json()),
+    queryFn: () =>
+      fetch("https://react-doctors-portal-server.vercel.app/users").then((res) => res.json()),
   });
 
   const handlemakeadmin = (id) => {
-    fetch(`http://localhost:5000/users/admin/${id}`, {
+    fetch(`https://react-doctors-portal-server.vercel.app/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("AccessToken")}`,
@@ -45,7 +46,10 @@ const Allusers = () => {
                 <td>{user.email}</td>
                 <td>
                   {user?.role !== "admin" && (
-                    <button onClick={() => handlemakeadmin(user._id)} className="btn btn-xs btn-success">
+                    <button
+                      onClick={() => handlemakeadmin(user._id)}
+                      className="btn btn-xs btn-success"
+                    >
                       Make Admin
                     </button>
                   )}

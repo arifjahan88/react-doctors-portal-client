@@ -2,6 +2,7 @@ import React from "react";
 import img from "../../../assets/images/doctor.png";
 import appointment from "../../../assets/images/appointment.png";
 import PrimaryButton from "../../../Components/PrimaryButton/PrimaryButton";
+import { Link } from "react-router-dom";
 
 const MakeApointment = () => {
   return (
@@ -24,7 +25,9 @@ const MakeApointment = () => {
               here', making it look like readable English. Many desktop
               publishing packages and web page
             </p>
-            <PrimaryButton>Get Started</PrimaryButton>
+            <Link to="/appointment">
+              <PrimaryButton>Get Started</PrimaryButton>
+            </Link>
           </div>
         </div>
       </div>

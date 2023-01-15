@@ -26,7 +26,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
       price,
     };
 
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://react-doctors-portal-server.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -83,7 +83,12 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
               placeholder="Email Address"
               className="input w-full input-bordered"
             />
-            <input name="phone" type="text" placeholder="Phone Number" className="input w-full input-bordered" />
+            <input
+              name="phone"
+              type="text"
+              placeholder="Phone Number"
+              className="input w-full input-bordered"
+            />
             <br />
             <input className="btn btn-accent w-full" type="submit" value="Submit" />
           </form>

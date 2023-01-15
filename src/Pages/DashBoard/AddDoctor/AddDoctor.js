@@ -7,7 +7,7 @@ import Loading from "../../Shared/Loading/Loading";
 
 const AddDoctor = () => {
   const navigate = useNavigate();
-  const imageHostKey = process.env.REACT_APP_imgbb_key;
+  const imageHostKey = "ffddeb2edca954e6ab34fa5f9dcd74ad";
 
   const {
     register,
@@ -18,7 +18,9 @@ const AddDoctor = () => {
   const { data: specialties, isLoading } = useQuery({
     queryKey: ["specialty"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/appointmentspeciality");
+      const res = await fetch(
+        "https://react-doctors-portal-server.vercel.app/appointmentspeciality"
+      );
       const data = await res.json();
       return data;
     },
@@ -48,7 +50,7 @@ const AddDoctor = () => {
           };
 
           //save doctors informations
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://react-doctors-portal-server.vercel.app/doctors", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -74,7 +76,12 @@ const AddDoctor = () => {
             <span className="label-text">Name</span>
           </label>
 
-          <input type="text" className="input input-bordered w-full" {...register("name")} placeholder="You Name" />
+          <input
+            type="text"
+            className="input input-bordered w-full"
+            {...register("name")}
+            placeholder="You Name"
+          />
         </div>
         <div className="form-control w-full ">
           <label className="label">
