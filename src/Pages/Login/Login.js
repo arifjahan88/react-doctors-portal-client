@@ -15,6 +15,7 @@ const Login = () => {
   const [token] = useToken(loginuserEmail);
   const location = useLocation();
   const navigate = useNavigate();
+  const [error, seterror] = useState("");
 
   const from = location.state?.from?.pathname || "/";
 
@@ -30,7 +31,10 @@ const Login = () => {
         console.log(user);
         setloginuserEmail(data.email);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        seterror(err.message);
+      });
   };
 
   const handlegooglelogin = () => {
@@ -71,6 +75,7 @@ const Login = () => {
               {...register("password", { required: "Password is required" })}
               placeholder="Password"
             />
+            <p className="text-red-600">{error}</p>
             {errors.password && (
               <p className="text-red-600 text-xs mt-1">{errors.password?.message}</p>
             )}
