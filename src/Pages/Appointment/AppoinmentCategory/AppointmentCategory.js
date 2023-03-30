@@ -45,43 +45,44 @@ const AppointmentCategory = () => {
       image: doctor,
     },
   ];
+
+  const categoryData = [
+    {
+      id: 1,
+      category: "Dentist",
+    },
+    {
+      id: 2,
+      category: "Newrology",
+    },
+    {
+      id: 3,
+      category: "Orthopedist",
+    },
+    {
+      id: 4,
+      category: "Cardiology",
+    },
+  ];
   return (
     <div>
       <h2 className="text-center font-bold text-4xl text-cyan-600 font-mono my-5">
         Please Select your specialties doctor.
       </h2>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 m-5 w-2/3 mx-auto">
-        <label
-          htmlFor="dentist-modal"
-          className="card shadow-xl cursor-pointer hover:bg-cyan-100 hover:scale-110 ease-in duration-200"
-        >
-          <div className="card-body text-center">
-            <h2 className="lg:text-6xl md:text-5xl text-4xl text-secondary font-bold text-center my-10">
-              Dentist
-            </h2>
-          </div>
-        </label>
-        <div className="card shadow-xl cursor-pointer hover:bg-cyan-100 hover:scale-110 ease-in duration-200">
-          <div className="card-body text-center">
-            <h2 className="lg:text-6xl md:text-5xl text-4xl text-secondary font-bold text-center my-10">
-              Newrology
-            </h2>
-          </div>
-        </div>
-        <div className="card shadow-xl cursor-pointer hover:bg-cyan-100 hover:scale-110 ease-in duration-200">
-          <div className="card-body text-center">
-            <h2 className="lg:text-6xl md:text-5xl text-4xl text-secondary font-bold text-center my-10">
-              Orthopedist
-            </h2>
-          </div>
-        </div>
-        <div className="card shadow-xl cursor-pointer hover:bg-cyan-100 hover:scale-110 ease-in duration-200">
-          <div className="card-body text-center">
-            <h2 className="lg:text-6xl md:text-5xl text-4xl text-secondary font-bold text-center my-10">
-              Cardiology
-            </h2>
-          </div>
-        </div>
+        {categoryData.map((category) => (
+          <label
+            key={category.id}
+            htmlFor="dentist-modal"
+            className="card shadow-xl cursor-pointer hover:bg-cyan-100 hover:scale-110 ease-in duration-200"
+          >
+            <div className="card-body text-center">
+              <h2 className="lg:text-6xl md:text-5xl text-4xl text-secondary font-bold text-center my-10">
+                {category.category}
+              </h2>
+            </div>
+          </label>
+        ))}
       </div>
 
       {/* Dentist Modal */}
